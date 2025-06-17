@@ -1,16 +1,148 @@
-﻿<!DOCTYPE html>
-<html>
-  <head>
-    <title>Welcome to My Site</title>
-    <meta charset="UTF-8">
-    <style>
-      body { font-family: sans-serif; background: #111; color: #eee; text-align: center; padding: 5em; }
-      h1 { color: #f9d342; }
-    </style>
-  </head>
-  <body>
-    <h1>Hello World 🌍</h1>
-    <p>This is my first free site. Built with energy & good vibes ✨</p>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Home Counseling</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-color: #a95c68;
+      --accent-color: #f9d342;
+      --bg-color: #fff8f5;
+      --text-color: #333;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+    header {
+      background: url('https://images.unsplash.com/photo-1528892952291-009c663ce843') no-repeat center center/cover;
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      padding: 2rem;
+      position: relative;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    header * {
+      position: relative;
+      z-index: 2;
+    }
+    header img.logo {
+      max-width: 100px;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+    }
+    header p {
+      font-size: 1.3rem;
+      max-width: 600px;
+    }
+    nav {
+      background: var(--main-color);
+      padding: 1rem;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+    }
+    footer {
+      background: #222;
+      color: #eee;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    section.programs {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .program-card {
+      margin-bottom: 2.5rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    .program-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .program-card h2 {
+      margin-top: 0.8rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--main-color);
+    }
+    form {
+      margin-top: 1rem;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-family: 'Open Sans', sans-serif;
+    }
+    button {
+      background-color: var(--accent-color);
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #e4bc00;
+    }
+    .contact-info {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
 
+<header>
+  <img src="ksa.png" alt="Happy Home Logo" class="logo">
+  <h1>Welcome to Happy Home</h1>
+  <p>Guiding young couples through real-life experiences toward a joyful marriage and fulfilling relationship. Let’s build your happy self and happy home, together.</p>
+</header>
+
+<nav>
+  <a href="premarital-market.html">Premarital Market</a>
+  <a href="reality-against-fantasy.html">Reality vs Fantasy</a>
+  <a href="alter-move.html">Alter Move</a>
+  <a href="home-puzzles.html">Home Puzzles</a>
+  <a href="living-room.html">Living Room</a>
+</nav>
+
+<!-- Existing program sections remain unchanged below -->
+
+<footer>
+  <p>Contact me anytime:</p>
+  <p>Email: <a href="mailto:tiffanygoddess91@gmail.com">tiffanygoddess91@gmail.com</a> | Telegram: <a href="https://t.me/goddesdKim">@goddesdKim</a> | X: <a href="https://x.com/GoddesKSA">@GoddesKSA</a></p>
+  <p>&copy; 2025 Happy Home Counseling. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
