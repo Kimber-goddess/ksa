@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel - Happy Home Blog</title>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Happy Home Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
       background-color: #121212;
       color: #f5f5f5;
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      padding-bottom: 3rem;
     }
     nav {
       display: flex;
@@ -32,77 +31,66 @@
       padding: 0;
       flex-wrap: wrap;
     }
+    nav ul li {
+      display: inline;
+    }
     nav ul li a {
       color: #f9d342;
       text-decoration: none;
       font-weight: bold;
       font-size: 0.9rem;
-    }
-    h1 {
-      text-align: center;
-      color: #f9d342;
-      margin-top: 1rem;
-    }
-    form {
-      max-width: 600px;
-      margin: 2rem auto;
-      background: #1e1e1e;
-      padding: 1.5rem;
-      border-radius: 10px;
-    }
-    form label {
-      display: block;
-      margin-bottom: 0.5rem;
-      margin-top: 1rem;
-    }
-    form input, form select, form textarea {
-      width: 100%;
-      padding: 0.5rem;
-      border-radius: 5px;
-      border: none;
-      margin-bottom: 1rem;
-      background-color: #2a2a2a;
-      color: #f5f5f5;
-    }
-    form button {
-      padding: 0.75rem 1.5rem;
-      background: #f9d342;
-      color: #121212;
-      border: none;
-      border-radius: 5px;
       cursor: pointer;
-      font-weight: bold;
     }
-    .preview {
-      max-width: 800px;
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: #f9d342;
+    }
+    .blog-container {
+      max-width: 900px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
     .post {
-      background: #1e1e1e;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
+      background-color: #1e1e1e;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
       border-radius: 10px;
-      position: relative;
+      box-shadow: 0 0 10px rgba(255,255,255,0.05);
     }
     .post h3 {
       color: #f9d342;
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 0.5rem;
+    }
+    .post .meta {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 1rem;
+    }
+    .post p {
+      line-height: 1.6;
+      color: #ccc;
     }
     .post img {
-      max-width: 100%;
+      width: 100%;
       border-radius: 8px;
       margin: 1rem 0;
     }
-    .delete-btn {
-      background: crimson;
-      color: #fff;
-      padding: 0.4rem 0.8rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #f9d342;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -110,79 +98,55 @@
   <nav>
     <a href="index.html"><img src="ksa.png" alt="Happy Home Logo"></a>
     <ul>
-      <li><a href="blog.html">View Blog</a></li>
+      <li><a onclick="filterCategory('💍 Relationships')">💍 Relationships</a></li>
+      <li><a onclick="filterCategory('💬 Communication')">💬 Communication</a></li>
+      <li><a onclick="filterCategory('💡 Tips')">💡 Tips</a></li>
+      <li><a onclick="filterCategory('❤️ Emotional Wellness')">❤️ Emotional Wellness</a></li>
+      <li><a href="admin.html">Admin</a></li>
     </ul>
   </nav>
 
-  <h1>Admin Blog Panel</h1>
-  <form id="blogForm">
-    <label for="title">Title:</label>
-    <input type="text" id="title" required>
+  <header>
+    <h1>Happy Home Blog</h1>
+    <p>Real experiences, practical tips, deep insights.</p>
+  </header>
 
-    <label for="category">Category:</label>
-    <select id="category">
-      <option>💍 Relationships</option>
-      <option>💬 Communication</option>
-      <option>💡 Tips</option>
-      <option>❤️ Emotional Wellness</option>
-    </select>
+  <div class="blog-container" id="blogPosts"></div>
 
-    <label for="content">Content:</label>
-    <textarea id="content" rows="6" required></textarea>
-
-    <label for="imageUrl">Image URL (optional):</label>
-    <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg">
-
-    <button type="submit">Post Blog</button>
-  </form>
-
-  <section class="preview" id="preview"></section>
+  <footer>
+    <p>Contact: <a href="mailto:tiffanygoddess91@gmail.com">tiffanygoddess91@gmail.com</a> | Telegram: <a href="https://t.me/goddesdKim">@goddesdKim</a> | X: <a href="https://x.com/GoddesKSA">@GoddesKSA</a></p>
+    <p>&copy; 2025 Happy Home Counseling. All rights reserved.</p>
+  </footer>
 
   <script>
-    const blogForm = document.getElementById('blogForm');
-    const preview = document.getElementById('preview');
-    let blogs = JSON.parse(localStorage.getItem('blogs')) || [];
+    const container = document.getElementById("blogPosts");
+    const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
 
-    function saveBlogs() {
-      localStorage.setItem('blogs', JSON.stringify(blogs));
-    }
+    function renderBlogs(category = null) {
+      container.innerHTML = '';
+      const filtered = category ? blogs.filter(b => b.category === category) : blogs;
 
-    function renderBlogs() {
-      preview.innerHTML = '';
-      blogs.forEach((post, index) => {
-        const div = document.createElement('div');
-        div.className = 'post';
+      if (filtered.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color:#aaa;">No blog posts available for this category.</p>';
+        return;
+      }
+
+      filtered.forEach(post => {
+        const div = document.createElement("div");
+        div.className = "post";
         div.innerHTML = `
           <h3>${post.title}</h3>
-          <button class="delete-btn" onclick="deletePost(${index})">Delete</button>
-          <p><em>${post.date}</em> - <strong>${post.category}</strong></p>
+          <div class="meta">📅 ${post.date} | 📂 ${post.category}</div>
           ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Blog Image">` : ''}
           <p>${post.content}</p>
         `;
-        preview.appendChild(div);
+        container.appendChild(div);
       });
     }
 
-    function deletePost(index) {
-      blogs.splice(index, 1);
-      saveBlogs();
-      renderBlogs();
+    function filterCategory(category) {
+      renderBlogs(category);
     }
-
-    blogForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const newPost = {
-        title: document.getElementById('title').value,
-        category: document.getElementById('category').value,
-        content: document.getElementById('content').value,
-        imageUrl: document.getElementById('imageUrl').value,
-        date: new Date().toLocaleDateString()
-      };
-      blogs.unshift(newPost);
-      saveBlogs();
-      renderBlogs();
-      blogForm.reset();
-    });
 
     renderBlogs();
   </script>
