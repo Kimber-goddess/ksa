@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Home Blog</title>
+  <title>Happy Home Counseling</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
@@ -17,20 +17,19 @@
       align-items: center;
       justify-content: space-between;
       background: #1e1e1e;
-      padding: 1rem 1.5rem;
+      padding: 1rem 2rem;
       flex-wrap: wrap;
     }
     nav img {
-      height: 45px;
+      height: 50px;
     }
     nav ul {
       list-style: none;
       display: flex;
-      gap: 0.75rem;
+      gap: 1rem;
       margin: 0;
       padding: 0;
       flex-wrap: wrap;
-      justify-content: center;
     }
     nav ul li {
       display: inline;
@@ -39,12 +38,11 @@
       color: #f9d342;
       text-decoration: none;
       font-weight: bold;
-      font-size: 0.9rem;
     }
     header {
       background: url('https://images.unsplash.com/photo-1604186837795-373935f38a2d?auto=format&fit=crop&w=1280&q=80') center/cover no-repeat;
       text-align: center;
-      padding: 4rem 1.5rem;
+      padding: 5rem 2rem;
       position: relative;
     }
     header::before {
@@ -58,42 +56,55 @@
       position: relative;
       z-index: 2;
     }
+    header img {
+      max-height: 70px;
+      margin-bottom: 1rem;
+    }
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+      font-size: 3.2rem;
       color: #f9d342;
       margin: 0;
     }
     header p {
-      font-size: 1rem;
+      font-size: 1.2rem;
       color: #ddd;
       margin-top: 0.5rem;
     }
-    .blog-container {
-      max-width: 900px;
-      margin: 3rem auto;
-      padding: 0 1rem;
+    .programs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
     }
-    .post {
+    .program {
       background-color: #1e1e1e;
-      margin-bottom: 2rem;
       padding: 1.5rem;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255,255,255,0.05);
+      text-align: center;
     }
-    .post h3 {
-      color: #f9d342;
+    .program h3 {
       font-family: 'Playfair Display', serif;
-      margin: 0 0 0.5rem;
+      color: #f9d342;
+      margin-bottom: 0.5rem;
     }
-    .post .meta {
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-bottom: 1rem;
-    }
-    .post p {
-      line-height: 1.6;
+    .program p {
+      font-size: 0.95rem;
+      line-height: 1.4;
       color: #ccc;
+    }
+    .program a {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #f9d342;
+      color: #1f1f1f;
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
     }
     footer {
       background: #111;
@@ -112,43 +123,52 @@
   <nav>
     <a href="index.html"><img src="ksa.png" alt="Happy Home Logo"></a>
     <ul>
-      <li><a href="#">💍 Relationships</a></li>
-      <li><a href="#">💬 Communication</a></li>
-      <li><a href="#">💡 Tips</a></li>
-      <li><a href="#">❤️ Emotional Wellness</a></li>
+      <li><a href="premarital.html">Premarital Market</a></li>
+      <li><a href="reality.html">Reality vs Fantasy</a></li>
+      <li><a href="alter.html">Alter Move</a></li>
+      <li><a href="puzzles.html">Home Puzzles</a></li>
+      <li><a href="living.html">Living Room</a></li>
+      <li><a href="blog.html">Blog</a></li>
     </ul>
   </nav>
 
   <header>
-    <h1>Happy Home Blog</h1>
-    <p>Real experiences, practical tips, deep insights.</p>
+    <a href="index.html"><img src="ksa.png" alt="Happy Home Logo"></a>
+    <h1>Welcome to Happy Home Counseling</h1>
+    <p>Helping you build a happy self and a happy home</p>
   </header>
 
-  <div class="blog-container" id="blogPosts"></div>
+  <section class="programs">
+    <div class="program">
+      <h3>Premarital Market</h3>
+      <p>Understand the real foundations of marriage beyond the wedding. For engaged and intending couples.</p>
+      <a href="premarital.html">Explore</a>
+    </div>
+    <div class="program">
+      <h3>Reality Against Fantasy</h3>
+      <p>Dispel myths and expectations. Learn to align your mindset with practical relationship dynamics.</p>
+      <a href="reality.html">Explore</a>
+    </div>
+    <div class="program">
+      <h3>Alter Move</h3>
+      <p>Navigate the first year of marriage with tools for communication, roles, and emotional bonding.</p>
+      <a href="alter.html">Explore</a>
+    </div>
+    <div class="program">
+      <h3>Home Puzzles</h3>
+      <p>Solutions for the daily conflicts and lifestyle balance within a growing home.</p>
+      <a href="puzzles.html">Explore</a>
+    </div>
+    <div class="program">
+      <h3>Living Room</h3>
+      <p>A safe place for seasoned couples to reconnect and renew affection and purpose together.</p>
+      <a href="living.html">Explore</a>
+    </div>
+  </section>
 
   <footer>
     <p>Contact: <a href="mailto:tiffanygoddess91@gmail.com">tiffanygoddess91@gmail.com</a> | Telegram: <a href="https://t.me/goddesdKim">@goddesdKim</a> | X: <a href="https://x.com/GoddesKSA">@GoddesKSA</a></p>
     <p>&copy; 2025 Happy Home Counseling. All rights reserved.</p>
   </footer>
-
-  <script>
-    const container = document.getElementById("blogPosts");
-    const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
-
-    if (blogs.length === 0) {
-      container.innerHTML = '<p style="text-align:center; color:#aaa;">No blog posts available. Check back soon!</p>';
-    } else {
-      blogs.forEach(post => {
-        const div = document.createElement("div");
-        div.className = "post";
-        div.innerHTML = `
-          <h3>${post.title}</h3>
-          <div class="meta">📅 ${post.date} | 📂 ${post.category}</div>
-          <p>${post.content}</p>
-        `;
-        container.appendChild(div);
-      });
-    }
-  </script>
 </body>
 </html>
