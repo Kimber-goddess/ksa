@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Home Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1e1e1e;
+      padding: 1rem 1.5rem;
+      flex-wrap: wrap;
+    }
+    nav img {
+      height: 45px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 0.75rem;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav ul li {
+      display: inline;
+    }
+    nav ul li a {
+      color: #f9d342;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    header {
+      background: url('https://images.unsplash.com/photo-1604186837795-373935f38a2d?auto=format&fit=crop&w=1280&q=80') center/cover no-repeat;
+      text-align: center;
+      padding: 4rem 1.5rem;
+      position: relative;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    header * {
+      position: relative;
+      z-index: 2;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #f9d342;
+      margin: 0;
+    }
+    header p {
+      font-size: 1rem;
+      color: #ddd;
+      margin-top: 0.5rem;
+    }
+    .blog-container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .post {
+      background-color: #1e1e1e;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.05);
+    }
+    .post h3 {
+      color: #f9d342;
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 0.5rem;
+    }
+    .post .meta {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 1rem;
+    }
+    .post p {
+      line-height: 1.6;
+      color: #ccc;
+    }
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #f9d342;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html"><img src="ksa.png" alt="Happy Home Logo"></a>
+    <ul>
+      <li><a href="#">💍 Relationships</a></li>
+      <li><a href="#">💬 Communication</a></li>
+      <li><a href="#">💡 Tips</a></li>
+      <li><a href="#">❤️ Emotional Wellness</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Happy Home Blog</h1>
+    <p>Real experiences, practical tips, deep insights.</p>
+  </header>
+
+  <div class="blog-container" id="blogPosts"></div>
+
+  <footer>
+    <p>Contact: <a href="mailto:tiffanygoddess91@gmail.com">tiffanygoddess91@gmail.com</a> | Telegram: <a href="https://t.me/goddesdKim">@goddesdKim</a> | X: <a href="https://x.com/GoddesKSA">@GoddesKSA</a></p>
+    <p>&copy; 2025 Happy Home Counseling. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const container = document.getElementById("blogPosts");
+    const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+
+    if (blogs.length === 0) {
+      container.innerHTML = '<p style="text-align:center; color:#aaa;">No blog posts available. Check back soon!</p>';
+    } else {
+      blogs.forEach(post => {
+        const div = document.createElement("div");
+        div.className = "post";
+        div.innerHTML = `
+          <h3>${post.title}</h3>
+          <div class="meta">📅 ${post.date} | 📂 ${post.category}</div>
+          <p>${post.content}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>

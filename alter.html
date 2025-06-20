@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alter Move - Happy Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+    header {
+      background: url('https://images.unsplash.com/photo-1604186837795-373935f38a2d?auto=format&fit=crop&w=1280&q=80') center/cover no-repeat;
+      text-align: center;
+      padding: 5rem 2rem;
+      position: relative;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    header * {
+      position: relative;
+      z-index: 2;
+    }
+    header a img {
+      max-height: 70px;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #f9d342;
+      margin: 0;
+    }
+    .content {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.05);
+    }
+    .content h2 {
+      font-family: 'Playfair Display', serif;
+      color: #f9d342;
+      margin-bottom: 1rem;
+    }
+    .content img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    .content p {
+      line-height: 1.6;
+      color: #ccc;
+    }
+    form {
+      margin-top: 2rem;
+      background: #181818;
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    button {
+      padding: 0.8rem 1.5rem;
+      background-color: #f9d342;
+      border: none;
+      font-weight: bold;
+      color: #121212;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #f9d342;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="ksa.png" alt="Logo"></a>
+    <h1>Alter Move</h1>
+  </header>
+
+  <div class="content">
+    <h2>Thriving in Year One</h2>
+    <img src="https://images.unsplash.com/photo-1613487950408-4f4adba25d0d?auto=format&fit=crop&w=1050&q=80" alt="Newlywed Life">
+    <p>
+      Alter Move is specially designed for newlyweds navigating their first year together. 
+      It focuses on communication, emotional adaptation, understanding roles, and financial cooperation. 
+      Build the trust and rhythm that sustains love beyond the honeymoon.
+    </p>
+    <p><strong>Duration:</strong> 4 weeks (weekly sessions)</p>
+
+    <form id="applyForm">
+      <input type="text" name="name" placeholder="Your Full Name" required>
+      <input type="email" name="email" placeholder="Your Email Address" required>
+      <input type="hidden" name="program" value="Alter Move">
+      <button type="submit">Apply Now</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>Contact: <a href="mailto:tiffanygoddess91@gmail.com">tiffanygoddess91@gmail.com</a> | Telegram: <a href="https://t.me/goddesdKim">@goddesdKim</a> | X: <a href="https://x.com/GoddesKSA">@GoddesKSA</a></p>
+    <p>&copy; 2025 Happy Home Counseling. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('applyForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const program = form.program.value;
+
+      // Send to Telegram
+      const telegramData = {
+        chat_id: '6791511571',
+        text: `📩 New Application:\n\n👤 Name: ${name}\n📧 Email: ${email}\n📚 Program: ${program}`
+      };
+
+      await fetch(`https://api.telegram.org/bot7208093024:AAHZl3y6ycNNhyv6d4e4EEGBnjTqFT6UhCc/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(telegramData)
+      });
+
+      // Send to Formspree
+      await fetch("https://formspree.io/f/mldnwddj", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, program })
+      });
+
+      // Redirect and alert
+      window.open("https://t.me/goddesdKim", "_blank");
+      alert("Application sent successfully!");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
