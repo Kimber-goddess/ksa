@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Home Counseling</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
@@ -12,8 +12,35 @@
       background-color: #121212;
       color: #f5f5f5;
     }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1e1e1e;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+    }
+    nav img {
+      height: 50px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+    nav ul li {
+      display: inline;
+    }
+    nav ul li a {
+      color: #f9d342;
+      text-decoration: none;
+      font-weight: bold;
+    }
     header {
-      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3nfSvJhsjCECeJEtmS3M_0UNB1aDyn1zfK1LfMKJmUfBNhDfVRM5taGI&s=10') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1604186837795-373935f38a2d?auto=format&fit=crop&w=1280&q=80') center/cover no-repeat;
       text-align: center;
       padding: 5rem 2rem;
       position: relative;
@@ -93,7 +120,19 @@
   </style>
 </head>
 <body>
-  <header style="background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3nfSvJhsjCECeJEtmS3M_0UNB1aDyn1zfK1LfMKJmUfBNhDfVRM5taGI&s=10') center/cover no-repeat;">
+  <nav>
+    <a href="index.html"><img src="ksa.png" alt="Happy Home Logo"></a>
+    <ul>
+      <li><a href="premarital.html">Premarital Market</a></li>
+      <li><a href="reality.html">Reality vs Fantasy</a></li>
+      <li><a href="alter.html">Alter Move</a></li>
+      <li><a href="puzzles.html">Home Puzzles</a></li>
+      <li><a href="living.html">Living Room</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </nav>
+
+  <header>
     <a href="index.html"><img src="ksa.png" alt="Happy Home Logo"></a>
     <h1>Welcome to Happy Home Counseling</h1>
     <p>Helping you build a happy self and a happy home</p>
