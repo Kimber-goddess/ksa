@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Home Counseling</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Happy Home Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
       background-color: #121212;
       color: #f5f5f5;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding-bottom: 3rem;
     }
     nav {
       display: flex;
@@ -31,91 +32,77 @@
       padding: 0;
       flex-wrap: wrap;
     }
-    nav ul li {
-      display: inline;
-    }
     nav ul li a {
       color: #f9d342;
       text-decoration: none;
       font-weight: bold;
-    }
-    header {
-      background: url('https://images.unsplash.com/photo-1604186837795-373935f38a2d?auto=format&fit=crop&w=1280&q=80') center/cover no-repeat;
-      text-align: center;
-      padding: 5rem 2rem;
-      position: relative;
-    }
-    header::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 1;
-    }
-    header * {
-      position: relative;
-      z-index: 2;
-    }
-    header img {
-      max-height: 70px;
-      margin-bottom: 1rem;
-    }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.2rem;
-      color: #f9d342;
-      margin: 0;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #ddd;
-      margin-top: 0.5rem;
-    }
-    .programs {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .program {
-      background-color: #1e1e1e;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.05);
-      text-align: center;
-    }
-    .program h3 {
-      font-family: 'Playfair Display', serif;
-      color: #f9d342;
-      margin-bottom: 0.5rem;
-    }
-    .program p {
-      font-size: 0.95rem;
-      line-height: 1.4;
-      color: #ccc;
-    }
-    .program a {
-      display: inline-block;
-      margin-top: 1rem;
-      background: #f9d342;
-      color: #1f1f1f;
-      padding: 0.6rem 1.2rem;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    footer {
-      background: #111;
-      color: #aaa;
-      text-align: center;
-      padding: 2rem 1rem;
       font-size: 0.9rem;
     }
-    footer a {
+    h1 {
+      text-align: center;
       color: #f9d342;
-      text-decoration: none;
+      margin-top: 1rem;
+    }
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #1e1e1e;
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      margin-top: 1rem;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 1rem;
+      background-color: #2a2a2a;
+      color: #f5f5f5;
+    }
+    form button {
+      padding: 0.75rem 1.5rem;
+      background: #f9d342;
+      color: #121212;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .preview {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .post {
+      background: #1e1e1e;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 10px;
+      position: relative;
+    }
+    .post h3 {
+      color: #f9d342;
+    }
+    .post img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    .delete-btn {
+      background: crimson;
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
     }
   </style>
 </head>
@@ -123,52 +110,81 @@
   <nav>
     <a href="index.html"><img src="ksa.png" alt="Happy Home Logo"></a>
     <ul>
-      <li><a href="premarital.html">Premarital Market</a></li>
-      <li><a href="reality.html">Reality vs Fantasy</a></li>
-      <li><a href="alter.html">Alter Move</a></li>
-      <li><a href="puzzles.html">Home Puzzles</a></li>
-      <li><a href="living.html">Living Room</a></li>
-      <li><a href="blog.html">Blog</a></li>
+      <li><a href="blog.html">View Blog</a></li>
     </ul>
   </nav>
 
-  <header>
-    <a href="index.html"><img src="ksa.png" alt="Happy Home Logo"></a>
-    <h1>Welcome to Happy Home Counseling</h1>
-    <p>Helping you build a happy self and a happy home</p>
-  </header>
+  <h1>Admin Blog Panel</h1>
+  <form id="blogForm">
+    <label for="title">Title:</label>
+    <input type="text" id="title" required>
 
-  <section class="programs">
-    <div class="program">
-      <h3>Premarital Market</h3>
-      <p>Understand the real foundations of marriage beyond the wedding. For engaged and intending couples.</p>
-      <a href="premarital.html">Explore</a>
-    </div>
-    <div class="program">
-      <h3>Reality Against Fantasy</h3>
-      <p>Dispel myths and expectations. Learn to align your mindset with practical relationship dynamics.</p>
-      <a href="reality.html">Explore</a>
-    </div>
-    <div class="program">
-      <h3>Alter Move</h3>
-      <p>Navigate the first year of marriage with tools for communication, roles, and emotional bonding.</p>
-      <a href="alter.html">Explore</a>
-    </div>
-    <div class="program">
-      <h3>Home Puzzles</h3>
-      <p>Solutions for the daily conflicts and lifestyle balance within a growing home.</p>
-      <a href="puzzles.html">Explore</a>
-    </div>
-    <div class="program">
-      <h3>Living Room</h3>
-      <p>A safe place for seasoned couples to reconnect and renew affection and purpose together.</p>
-      <a href="living.html">Explore</a>
-    </div>
-  </section>
+    <label for="category">Category:</label>
+    <select id="category">
+      <option>💍 Relationships</option>
+      <option>💬 Communication</option>
+      <option>💡 Tips</option>
+      <option>❤️ Emotional Wellness</option>
+    </select>
 
-  <footer>
-    <p>Contact: <a href="mailto:tiffanygoddess91@gmail.com">tiffanygoddess91@gmail.com</a> | Telegram: <a href="https://t.me/goddesdKim">@goddesdKim</a> | X: <a href="https://x.com/GoddesKSA">@GoddesKSA</a></p>
-    <p>&copy; 2025 Happy Home Counseling. All rights reserved.</p>
-  </footer>
+    <label for="content">Content:</label>
+    <textarea id="content" rows="6" required></textarea>
+
+    <label for="imageUrl">Image URL (optional):</label>
+    <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg">
+
+    <button type="submit">Post Blog</button>
+  </form>
+
+  <section class="preview" id="preview"></section>
+
+  <script>
+    const blogForm = document.getElementById('blogForm');
+    const preview = document.getElementById('preview');
+    let blogs = JSON.parse(localStorage.getItem('blogs')) || [];
+
+    function saveBlogs() {
+      localStorage.setItem('blogs', JSON.stringify(blogs));
+    }
+
+    function renderBlogs() {
+      preview.innerHTML = '';
+      blogs.forEach((post, index) => {
+        const div = document.createElement('div');
+        div.className = 'post';
+        div.innerHTML = `
+          <h3>${post.title}</h3>
+          <button class="delete-btn" onclick="deletePost(${index})">Delete</button>
+          <p><em>${post.date}</em> - <strong>${post.category}</strong></p>
+          ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Blog Image">` : ''}
+          <p>${post.content}</p>
+        `;
+        preview.appendChild(div);
+      });
+    }
+
+    function deletePost(index) {
+      blogs.splice(index, 1);
+      saveBlogs();
+      renderBlogs();
+    }
+
+    blogForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const newPost = {
+        title: document.getElementById('title').value,
+        category: document.getElementById('category').value,
+        content: document.getElementById('content').value,
+        imageUrl: document.getElementById('imageUrl').value,
+        date: new Date().toLocaleDateString()
+      };
+      blogs.unshift(newPost);
+      saveBlogs();
+      renderBlogs();
+      blogForm.reset();
+    });
+
+    renderBlogs();
+  </script>
 </body>
 </html>
