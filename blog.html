@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Home Blog</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet"/>
   <style>
     body {
       margin: 0;
@@ -26,16 +26,17 @@
     nav ul {
       list-style: none;
       display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       gap: 1rem;
       margin: 0;
       padding: 0;
-      flex-wrap: wrap;
     }
     nav ul li {
       display: inline;
     }
     nav ul li a {
-      color: #f9d342;
+      color: #f4a6b8;
       text-decoration: none;
       font-weight: bold;
       font-size: 0.9rem;
@@ -48,7 +49,7 @@
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.8rem;
-      color: #f9d342;
+      color: #f4a6b8;
     }
     .blog-container {
       max-width: 900px;
@@ -63,7 +64,7 @@
       box-shadow: 0 0 10px rgba(255,255,255,0.05);
     }
     .post h3 {
-      color: #f9d342;
+      color: #f4a6b8;
       font-family: 'Playfair Display', serif;
       margin: 0 0 0.5rem;
     }
@@ -89,14 +90,35 @@
       font-size: 0.9rem;
     }
     footer a {
-      color: #f9d342;
+      color: #f4a6b8;
       text-decoration: none;
+    }
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+        padding-left: 0;
+      }
+      nav ul li {
+        width: 100%;
+      }
+      nav ul li a {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
   <nav>
-    <a href="index.html"><img src="ksa.png" alt="Happy Home Logo"></a>
+    <a href="index.html"><img src="ksa.png" alt="Happy Home Logo" /></a>
     <ul>
       <li><a onclick="filterCategory('💍 Relationships')">💍 Relationships</a></li>
       <li><a onclick="filterCategory('💬 Communication')">💬 Communication</a></li>
@@ -110,44 +132,73 @@
     <p>Real experiences, practical tips, deep insights.</p>
   </header>
 
-  <div class="blog-container" id="blogPosts"></div>
+  <div class="blog-container" id="blogPosts">
+    <p style="text-align:center;">Loading blog posts...</p>
+  </div>
 
   <footer>
     <p>Contact: <a href="mailto:tiffanygoddess91@gmail.com">tiffanygoddess91@gmail.com</a> | Telegram: <a href="https://t.me/goddesdKim">@goddesdKim</a> | X: <a href="https://x.com/GoddesKSA">@GoddesKSA</a></p>
     <p>&copy; 2025 Happy Home Counseling. All rights reserved.</p>
   </footer>
 
+  <!-- Firebase App -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+
   <script>
-    const container = document.getElementById("blogPosts");
-    const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+    const firebaseConfig = {
+      apiKey: "AIzaSyDFgwtW2jkeHI7aI6uGxtC7HiBO5AyOYc8",
+      authDomain: "ksacademy-1e272.firebaseapp.com",
+      projectId: "ksacademy-1e272",
+      storageBucket: "ksacademy-1e272.firebasestorage.app",
+      messagingSenderId: "150895039045",
+      appId: "1:150895039045:web:adc64c69d5af81b912c92c"
+    };
 
-    function renderBlogs(category = null) {
-      container.innerHTML = '';
-      const filtered = category ? blogs.filter(b => b.category === category) : blogs;
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-      if (filtered.length === 0) {
-        container.innerHTML = '<p style="text-align:center; color:#aaa;">No blog posts available for this category.</p>';
-        return;
-      }
+    const blogPosts = document.getElementById("blogPosts");
 
-      filtered.forEach(post => {
+    function renderBlogs(posts) {
+      blogPosts.innerHTML = "";
+      posts.forEach(post => {
+        const data = post.data();
         const div = document.createElement("div");
         div.className = "post";
         div.innerHTML = `
-          <h3>${post.title}</h3>
-          <div class="meta">📅 ${post.date} | 📂 ${post.category}</div>
-          ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Blog Image">` : ''}
-          <p>${post.content}</p>
+          <h3>${data.title}</h3>
+          <div class="meta">📅 ${data.date} | 📂 ${data.category}</div>
+          ${data.imageUrl ? `<img src="${data.imageUrl}" alt="Blog Image" />` : ""}
+          <p>${data.content}</p>
         `;
-        container.appendChild(div);
+        blogPosts.appendChild(div);
+      });
+    }
+
+    function fetchBlogs(category = null) {
+      let query = db.collection("blogs").orderBy("timestamp", "desc");
+      if (category) {
+        query = query.where("category", "==", category);
+      }
+
+      query.get().then(snapshot => {
+        if (snapshot.empty) {
+          blogPosts.innerHTML = "<p style='text-align:center;'>No blog posts found.</p>";
+        } else {
+          renderBlogs(snapshot.docs);
+        }
+      }).catch(err => {
+        blogPosts.innerHTML = "<p style='color: red;'>Error fetching blogs: " + err.message + "</p>";
       });
     }
 
     function filterCategory(category) {
-      renderBlogs(category);
+      fetchBlogs(category);
     }
 
-    renderBlogs();
+    // Initial load
+    fetchBlogs();
   </script>
 </body>
 </html>
