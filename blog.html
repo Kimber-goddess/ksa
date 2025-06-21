@@ -6,6 +6,73 @@
   <title>Our Blog – Happy Home Counseling</title>
   <link rel="icon" href="ksa.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDFgwtW2jkeHI7aI6uGxtC7HiBO5AyOYc8",
+      authDomain: "ksacademy-1e272.firebaseapp.com",
+      projectId: "ksacademy-1e272",
+      storageBucket: "ksacademy-1e272.appspot.com",
+      messagingSenderId: "150895039045",
+      appId: "1:150895039045:web:adc64c69d5af81b912c92c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const preview = document.getElementById('preview');
+
+    async function fetchPosts() {
+      const querySnapshot = await getDocs(collection(db, "blogs"));
+      const blogs = [];
+      querySnapshot.forEach(doc => blogs.push(doc.data()));
+      renderBlogs(blogs);
+    }
+
+    function renderBlogs(blogs) {
+      preview.innerHTML = '';
+      blogs.forEach((post, index) => {
+        const div = document.createElement('div');
+        div.className = 'post';
+
+        const truncated = post.content.length > 200
+          ? post.content.slice(0, 200) + '...'
+          : post.content;
+
+        div.innerHTML = `
+          <h3>${post.title}</h3>
+          <p><em>${post.date}</em> - <strong>${post.category}</strong></p>
+          ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Blog Image">` : ''}
+          <p id="content-${index}" class="content-text">${truncated}</p>
+          <button onclick="toggleContent(${index}, \`${post.content.replace(/`/g, '\\`')}\`)" class="read-more-btn">Read More</button>
+        `;
+
+        preview.appendChild(div);
+      });
+    }
+
+    window.toggleContent = function(index, fullContent) {
+      const p = document.getElementById(`content-${index}`);
+      const btn = p.nextElementSibling;
+
+      if (p.dataset.full === 'true') {
+        p.innerHTML = fullContent.slice(0, 200) + '...';
+        btn.textContent = 'Read More';
+        p.dataset.full = 'false';
+      } else {
+        p.innerHTML = fullContent.replace(/\n/g, '<br>');
+        btn.textContent = 'Show Less';
+        p.dataset.full = 'true';
+      }
+    }
+
+    fetchPosts();
+  </script>
+
   <style>
     body {
       background-color: #121212;
@@ -15,7 +82,7 @@
       padding: 2rem;
     }
     h1 {
-      color: #f9d342;
+      color: #f4a6b8;
       text-align: center;
     }
     .preview {
@@ -29,7 +96,7 @@
       border-radius: 10px;
     }
     .post h3 {
-      color: #f9d342;
+      color: #f4a6b8;
       margin-bottom: 0.3rem;
     }
     .post img {
@@ -39,7 +106,7 @@
     }
     .read-more-btn {
       margin-top: 0.5rem;
-      background: #f9d342;
+      background: #f4a6b8;
       color: #121212;
       border: none;
       padding: 0.4rem 1rem;
@@ -56,7 +123,7 @@
       flex-wrap: wrap;
     }
     nav .logo img {
-      height: 40px;
+      height: 100px;
     }
     .nav-links {
       list-style: none;
@@ -92,49 +159,5 @@
 
   <h1>Happy Home Blog</h1>
   <section class="preview" id="preview"></section>
-
-  <script>
-    const preview = document.getElementById('preview');
-    let blogs = JSON.parse(localStorage.getItem('blogs')) || [];
-
-    function renderBlogs() {
-      preview.innerHTML = '';
-      blogs.forEach((post, index) => {
-        const div = document.createElement('div');
-        div.className = 'post';
-
-        const truncated = post.content.length > 200 
-          ? post.content.slice(0, 200) + '...'
-          : post.content;
-
-        div.innerHTML = `
-          <h3>${post.title}</h3>
-          <p><em>${post.date}</em> - <strong>${post.category}</strong></p>
-          ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Blog Image">` : ''}
-          <p id="content-${index}" class="content-text">${truncated}</p>
-          <button onclick="toggleContent(${index})" class="read-more-btn">Read More</button>
-        `;
-
-        preview.appendChild(div);
-      });
-    }
-
-    function toggleContent(index) {
-      const p = document.getElementById(`content-${index}`);
-      const btn = p.nextElementSibling;
-
-      if (p.dataset.full === 'true') {
-        p.innerHTML = blogs[index].content.slice(0, 200) + '...';
-        btn.textContent = 'Read More';
-        p.dataset.full = 'false';
-      } else {
-        p.innerHTML = blogs[index].content.replace(/\n/g, '<br>');
-        btn.textContent = 'Show Less';
-        p.dataset.full = 'true';
-      }
-    }
-
-    renderBlogs();
-  </script>
 </body>
 </html>
