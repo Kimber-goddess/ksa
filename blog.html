@@ -3,14 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Blog – Happy Home Counseling</title>
+  <title>Marriage Blog</title>
   <link rel="icon" href="ksa.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-
-  <!-- Firebase SDK -->
+  <style>
+    body {
+      background-color: #121212;
+      color: #f5f5f5;
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      color: #f4a6b8;
+      text-align: center;
+    }
+    .post {
+      background: #1e1e1e;
+      padding: 1rem;
+      margin: 1rem auto;
+      border-radius: 10px;
+      max-width: 600px;
+    }
+    .post img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    .read-more-btn {
+      background: transparent;
+      color: #f4a6b8;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0;
+    }
+  </style>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDFgwtW2jkeHI7aI6uGxtC7HiBO5AyOYc8",
@@ -24,140 +55,48 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const preview = document.getElementById('preview');
+    window.addEventListener('DOMContentLoaded', async () => {
+      const blogSection = document.getElementById('blogs');
+      const q = query(collection(db, 'blogs'), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
 
-    async function fetchPosts() {
-      const querySnapshot = await getDocs(collection(db, "blogs"));
-      const blogs = [];
-      querySnapshot.forEach(doc => blogs.push(doc.data()));
-      renderBlogs(blogs);
-    }
-
-    function renderBlogs(blogs) {
-      preview.innerHTML = '';
-      blogs.forEach((post, index) => {
+      snapshot.forEach(doc => {
+        const post = doc.data();
         const div = document.createElement('div');
         div.className = 'post';
 
-        const truncated = post.content.length > 200
-          ? post.content.slice(0, 200) + '...'
-          : post.content;
-
+        const shortContent = post.content.slice(0, 150) + (post.content.length > 150 ? '...' : '');
         div.innerHTML = `
           <h3>${post.title}</h3>
           <p><em>${post.date}</em> - <strong>${post.category}</strong></p>
           ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Blog Image">` : ''}
-          <p id="content-${index}" class="content-text">${truncated}</p>
-          <button onclick="toggleContent(${index}, \`${post.content.replace(/`/g, '\\`')}\`)" class="read-more-btn">Read More</button>
+          <p class="content-preview">${shortContent}</p>
+          <button class="read-more-btn">Read More</button>
+          <p class="full-content" style="display: none;">${post.content}</p>
         `;
 
-        preview.appendChild(div);
+        const btn = div.querySelector('.read-more-btn');
+        const preview = div.querySelector('.content-preview');
+        const full = div.querySelector('.full-content');
+        btn.addEventListener('click', () => {
+          if (full.style.display === 'none') {
+            full.style.display = 'block';
+            preview.style.display = 'none';
+            btn.textContent = 'Show Less';
+          } else {
+            full.style.display = 'none';
+            preview.style.display = 'block';
+            btn.textContent = 'Read More';
+          }
+        });
+
+        blogSection.appendChild(div);
       });
-    }
-
-    window.toggleContent = function(index, fullContent) {
-      const p = document.getElementById(`content-${index}`);
-      const btn = p.nextElementSibling;
-
-      if (p.dataset.full === 'true') {
-        p.innerHTML = fullContent.slice(0, 200) + '...';
-        btn.textContent = 'Read More';
-        p.dataset.full = 'false';
-      } else {
-        p.innerHTML = fullContent.replace(/\n/g, '<br>');
-        btn.textContent = 'Show Less';
-        p.dataset.full = 'true';
-      }
-    }
-
-    fetchPosts();
+    });
   </script>
-
-  <style>
-    body {
-      background-color: #121212;
-      color: #f5f5f5;
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      padding: 2rem;
-    }
-    h1 {
-      color: #f4a6b8;
-      text-align: center;
-    }
-    .preview {
-      max-width: 800px;
-      margin: 2rem auto;
-    }
-    .post {
-      background: #1e1e1e;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      border-radius: 10px;
-    }
-    .post h3 {
-      color: #f4a6b8;
-      margin-bottom: 0.3rem;
-    }
-    .post img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin: 1rem 0;
-    }
-    .read-more-btn {
-      margin-top: 0.5rem;
-      background: #f4a6b8;
-      color: #121212;
-      border: none;
-      padding: 0.4rem 1rem;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    nav.navbar {
-      background: #1e1e1e;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      flex-wrap: wrap;
-    }
-    nav .logo img {
-      height: 100px;
-    }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.2rem;
-      flex-wrap: wrap;
-    }
-    .nav-links li a {
-      color: #f5f5f5;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    @media (max-width: 768px) {
-      .nav-links {
-        flex-direction: column;
-        gap: 0.8rem;
-        margin-top: 1rem;
-      }
-    }
-  </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <a href="index.html" class="logo"><img src="ksa.png" alt="Logo"></a>
-    <ul class="nav-links">
-      <li><a href="blog.html">💍 Relationships</a></li>
-      <li><a href="blog.html">💬 Communication</a></li>
-      <li><a href="blog.html">💡 Tips</a></li>
-      <li><a href="blog.html">❤️ Emotional Wellness</a></li>
-    </ul>
-  </nav>
-
-  <h1>Happy Home Blog</h1>
-  <section class="preview" id="preview"></section>
+  <h1>Marriage Blog</h1>
+  <section id="blogs"></section>
 </body>
 </html>
