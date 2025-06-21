@@ -3,45 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marriage Blog</title>
+  <title>Blog - KS Academy</title>
   <link rel="icon" href="ksa.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       background-color: #121212;
       color: #f5f5f5;
       font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      padding: 2rem;
+    }
+    nav {
+      background-color: #1e1e1e;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    nav img {
+      height: 100px;
+    }
+    nav a {
+      color: #f5f5f5;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #f4a6b8;
     }
     h1 {
-      color: #f4a6b8;
       text-align: center;
+      margin: 2rem;
+      color: #f4a6b8;
+    }
+    .posts {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
     .post {
       background: #1e1e1e;
       padding: 1rem;
-      margin: 1rem auto;
+      margin-bottom: 2rem;
       border-radius: 10px;
-      max-width: 600px;
+    }
+    .post h3 {
+      color: #f4a6b8;
     }
     .post img {
-      max-width: 100%;
+      width: 100%;
       border-radius: 8px;
       margin: 1rem 0;
     }
     .read-more-btn {
-      background: transparent;
-      color: #f4a6b8;
+      background: none;
       border: none;
+      color: #f4a6b8;
       cursor: pointer;
       font-weight: bold;
-      padding: 0;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #1e1e1e;
+      color: #888;
+      font-size: 0.9rem;
+      margin-top: 2rem;
     }
   </style>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDFgwtW2jkeHI7aI6uGxtC7HiBO5AyOYc8",
@@ -55,48 +93,63 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    window.addEventListener('DOMContentLoaded', async () => {
-      const blogSection = document.getElementById('blogs');
-      const q = query(collection(db, 'blogs'), orderBy("createdAt", "desc"));
-      const snapshot = await getDocs(q);
+    const postsContainer = document.addEventListener('DOMContentLoaded', async () => {
+      const container = document.getElementById('posts');
+      const snapshot = await getDocs(collection(db, "blogs"));
 
-      snapshot.forEach(doc => {
-        const post = doc.data();
+      snapshot.forEach(docSnap => {
+        const post = docSnap.data();
         const div = document.createElement('div');
         div.className = 'post';
 
-        const shortContent = post.content.slice(0, 150) + (post.content.length > 150 ? '...' : '');
+        const short = post.content.slice(0, 150);
+        const hasMore = post.content.length > 150;
+
         div.innerHTML = `
           <h3>${post.title}</h3>
           <p><em>${post.date}</em> - <strong>${post.category}</strong></p>
           ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Blog Image">` : ''}
-          <p class="content-preview">${shortContent}</p>
-          <button class="read-more-btn">Read More</button>
-          <p class="full-content" style="display: none;">${post.content}</p>
+          <p class="preview-text">${short}${hasMore ? '...' : ''}</p>
+          ${hasMore ? `<button class="read-more-btn">Read More</button>` : ''}
+          <p class="full-text" style="display:none">${post.content}</p>
         `;
 
-        const btn = div.querySelector('.read-more-btn');
-        const preview = div.querySelector('.content-preview');
-        const full = div.querySelector('.full-content');
-        btn.addEventListener('click', () => {
-          if (full.style.display === 'none') {
-            full.style.display = 'block';
-            preview.style.display = 'none';
-            btn.textContent = 'Show Less';
-          } else {
-            full.style.display = 'none';
-            preview.style.display = 'block';
-            btn.textContent = 'Read More';
-          }
-        });
+        const readMoreBtn = div.querySelector('.read-more-btn');
+        const previewText = div.querySelector('.preview-text');
+        const fullText = div.querySelector('.full-text');
 
-        blogSection.appendChild(div);
+        if (readMoreBtn) {
+          readMoreBtn.addEventListener('click', () => {
+            const expanded = fullText.style.display === 'block';
+            fullText.style.display = expanded ? 'none' : 'block';
+            previewText.style.display = expanded ? 'block' : 'none';
+            readMoreBtn.textContent = expanded ? 'Read More' : 'Show Less';
+          });
+        }
+
+        container.appendChild(div);
       });
     });
   </script>
 </head>
 <body>
-  <h1>Marriage Blog</h1>
-  <section id="blogs"></section>
+  <nav>
+    <a href="index.html"><img src="ksa.png" alt="Logo"></a>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blogs</a>
+      <a href="#">💍 Relationships</a>
+      <a href="#">💬 Communication</a>
+      <a href="#">💡 Tips</a>
+      <a href="#">❤️ Emotional Wellness</a>
+    </div>
+  </nav>
+
+  <h1>Our Latest Blog Posts</h1>
+  <section class="posts" id="posts"></section>
+
+  <footer>
+    &copy; 2025 KS Academy. All Rights Reserved.
+  </footer>
 </body>
 </html>
