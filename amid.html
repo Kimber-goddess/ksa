@@ -69,6 +69,14 @@
       cursor: pointer;
       float: right;
     }
+    .read-more-btn {
+      background: transparent;
+      color: #f4a6b8;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0;
+    }
   </style>
 
   <!-- Firebase SDK -->
@@ -98,13 +106,28 @@
         const id = docSnap.id;
         const div = document.createElement('div');
         div.className = 'post';
+
+        const shortContent = post.content.slice(0, 150) + (post.content.length > 150 ? '...' : '');
         div.innerHTML = `
           <h3>${post.title}</h3>
           <button class="delete-btn" onclick="deletePost('${id}')">Delete</button>
           <p><em>${post.date}</em> - <strong>${post.category}</strong></p>
           ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Blog Image">` : ''}
-          <p>${post.content}</p>
+          <p class="content-preview">${shortContent}</p>
+          <button class="read-more-btn">Read More</button>
+          <p class="full-content" style="display: none;">${post.content}</p>
         `;
+
+        const btn = div.querySelector('.read-more-btn');
+        const previewText = div.querySelector('.content-preview');
+        const fullText = div.querySelector('.full-content');
+        btn.addEventListener('click', () => {
+          const isHidden = fullText.style.display === 'none';
+          fullText.style.display = isHidden ? 'block' : 'none';
+          previewText.style.display = isHidden ? 'none' : 'block';
+          btn.textContent = isHidden ? 'Show Less' : 'Read More';
+        });
+
         preview.appendChild(div);
       });
     }
