@@ -1,206 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Home Blog</title>
-    <!-- Favicon -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Blog – Happy Home Counseling</title>
   <link rel="icon" href="ksa.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
       background-color: #121212;
       color: #f5f5f5;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #1e1e1e;
-      padding: 1rem 2rem;
-      flex-wrap: wrap;
-    }
-    nav img {
-      height: 100px;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 1rem;
+      font-family: 'Open Sans', sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 2rem;
     }
-    nav ul li {
-      display: inline;
-    }
-    nav ul li a {
-      color: #f4a6b8;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-    header {
+    h1 {
+      color: #f9d342;
       text-align: center;
-      padding: 3rem 1rem;
     }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      color: #f4a6b8;
-    }
-    .blog-container {
-      max-width: 900px;
+    .preview {
+      max-width: 800px;
       margin: 2rem auto;
-      padding: 0 1rem;
     }
     .post {
-      background-color: #1e1e1e;
-      margin-bottom: 2rem;
-      padding: 1.5rem;
+      background: #1e1e1e;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.05);
     }
     .post h3 {
-      color: #f4a6b8;
-      font-family: 'Playfair Display', serif;
-      margin: 0 0 0.5rem;
-    }
-    .post .meta {
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-bottom: 1rem;
-    }
-    .post p {
-      line-height: 1.6;
-      color: #ccc;
+      color: #f9d342;
+      margin-bottom: 0.3rem;
     }
     .post img {
-      width: 100%;
+      max-width: 100%;
       border-radius: 8px;
       margin: 1rem 0;
     }
-    footer {
-      background: #111;
-      color: #aaa;
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
+    .read-more-btn {
+      margin-top: 0.5rem;
+      background: #f9d342;
+      color: #121212;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
     }
-    footer a {
-      color: #f4a6b8;
+    nav.navbar {
+      background: #1e1e1e;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+    }
+    nav .logo img {
+      height: 40px;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links li a {
+      color: #f5f5f5;
       text-decoration: none;
+      font-weight: 600;
     }
     @media (max-width: 768px) {
-      nav {
+      .nav-links {
         flex-direction: column;
-        align-items: flex-start;
-      }
-      nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-        width: 100%;
-        padding-left: 0;
-      }
-      nav ul li {
-        width: 100%;
-      }
-      nav ul li a {
-        display: block;
-        width: 100%;
-        padding: 0.5rem 0;
-        font-size: 1rem;
+        gap: 0.8rem;
+        margin-top: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html"><img src="ksa.png" alt="Happy Home Logo" /></a>
-    <ul>
-      <li><a onclick="filterCategory('💍 Relationships')">💍 Relationships</a></li>
-      <li><a onclick="filterCategory('💬 Communication')">💬 Communication</a></li>
-      <li><a onclick="filterCategory('💡 Tips')">💡 Tips</a></li>
-      <li><a onclick="filterCategory('❤️ Emotional Wellness')">❤️ Emotional Wellness</a></li>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="logo"><img src="ksa.png" alt="Logo"></a>
+    <ul class="nav-links">
+      <li><a href="blog.html">💍 Relationships</a></li>
+      <li><a href="blog.html">💬 Communication</a></li>
+      <li><a href="blog.html">💡 Tips</a></li>
+      <li><a href="blog.html">❤️ Emotional Wellness</a></li>
     </ul>
   </nav>
 
-  <header>
-    <h1>Happy Home Blog</h1>
-    <p>Real experiences, practical tips, deep insights.</p>
-  </header>
-
-  <div class="blog-container" id="blogPosts">
-    <p style="text-align:center;">Loading blog posts...</p>
-  </div>
-
-  <footer>
-    <p>Contact: <a href="mailto:tiffanygoddess91@gmail.com">tiffanygoddess91@gmail.com</a> | Telegram: <a href="https://t.me/goddesdKim">@goddesdKim</a> | X: <a href="https://x.com/GoddesKSA">@GoddesKSA</a></p>
-    <p>&copy; 2025 Happy Home Counseling. All rights reserved.</p>
-  </footer>
-
-  <!-- Firebase App -->
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+  <h1>Happy Home Blog</h1>
+  <section class="preview" id="preview"></section>
 
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDFgwtW2jkeHI7aI6uGxtC7HiBO5AyOYc8",
-      authDomain: "ksacademy-1e272.firebaseapp.com",
-      projectId: "ksacademy-1e272",
-      storageBucket: "ksacademy-1e272.firebasestorage.app",
-      messagingSenderId: "150895039045",
-      appId: "1:150895039045:web:adc64c69d5af81b912c92c"
-    };
+    const preview = document.getElementById('preview');
+    let blogs = JSON.parse(localStorage.getItem('blogs')) || [];
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    function renderBlogs() {
+      preview.innerHTML = '';
+      blogs.forEach((post, index) => {
+        const div = document.createElement('div');
+        div.className = 'post';
 
-    const blogPosts = document.getElementById("blogPosts");
+        const truncated = post.content.length > 200 
+          ? post.content.slice(0, 200) + '...'
+          : post.content;
 
-    function renderBlogs(posts) {
-      blogPosts.innerHTML = "";
-      posts.forEach(post => {
-        const data = post.data();
-        const div = document.createElement("div");
-        div.className = "post";
         div.innerHTML = `
-          <h3>${data.title}</h3>
-          <div class="meta">📅 ${data.date} | 📂 ${data.category}</div>
-          ${data.imageUrl ? `<img src="${data.imageUrl}" alt="Blog Image" />` : ""}
-          <p>${data.content}</p>
+          <h3>${post.title}</h3>
+          <p><em>${post.date}</em> - <strong>${post.category}</strong></p>
+          ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Blog Image">` : ''}
+          <p id="content-${index}" class="content-text">${truncated}</p>
+          <button onclick="toggleContent(${index})" class="read-more-btn">Read More</button>
         `;
-        blogPosts.appendChild(div);
+
+        preview.appendChild(div);
       });
     }
 
-    function fetchBlogs(category = null) {
-      let query = db.collection("blogs").orderBy("timestamp", "desc");
-      if (category) {
-        query = query.where("category", "==", category);
+    function toggleContent(index) {
+      const p = document.getElementById(`content-${index}`);
+      const btn = p.nextElementSibling;
+
+      if (p.dataset.full === 'true') {
+        p.innerHTML = blogs[index].content.slice(0, 200) + '...';
+        btn.textContent = 'Read More';
+        p.dataset.full = 'false';
+      } else {
+        p.innerHTML = blogs[index].content.replace(/\n/g, '<br>');
+        btn.textContent = 'Show Less';
+        p.dataset.full = 'true';
       }
-
-      query.get().then(snapshot => {
-        if (snapshot.empty) {
-          blogPosts.innerHTML = "<p style='text-align:center;'>No blog posts found.</p>";
-        } else {
-          renderBlogs(snapshot.docs);
-        }
-      }).catch(err => {
-        blogPosts.innerHTML = "<p style='color: red;'>Error fetching blogs: " + err.message + "</p>";
-      });
     }
 
-    function filterCategory(category) {
-      fetchBlogs(category);
-    }
-
-    // Initial load
-    fetchBlogs();
+    renderBlogs();
   </script>
 </body>
 </html>
